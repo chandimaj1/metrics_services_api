@@ -1,12 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#Create sample metric names
+#MetricName.create({title: "Metric A"})
+#MetricName.create({title: "Metric B"})
+#MetricName.create({title: "Metric C"})
+#MetricName.create({title: "Metric D"})
+#MetricName.create({title: "Metric E"})
 
-MetricName.create({title: "Metric A"})
-MetricName.create({title: "Metric B"})
-MetricName.create({title: "Metric C"})
-MetricName.create({title: "Metric D"})
+for i in 0...200
+    metric_name_id = Faker::Number.between(from: 1, to: 4)
+    value = Faker::Number.between(from: 0, to: 100)
+    created_at = Faker::Time.between_dates(from: Date.today - 10, to: Date.today, period: :all, format: :default)
+    Metric.create({value:value, metric_name_id: metric_name_id, created_at: created_at})
+end

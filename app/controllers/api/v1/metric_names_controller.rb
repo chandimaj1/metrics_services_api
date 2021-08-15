@@ -4,38 +4,20 @@ class Api::V1::MetricNamesController < ApplicationController
   # GET /metric_names
   def index
     @metric_names = MetricName.all
-
     render json: @metric_names
   end
 
-  # GET /metric_names/1
-  def show
-    render json: @metric_name
+  # GET /metric_names_list
+  def metric_names_list
+    @metric_names = MetricName.all
+    render json: @metric_names, include: ['metric'], status: :ok
   end
 
-  # POST /metric_names
-  def create
-    @metric_name = MetricName.new(metric_name_params)
 
-    if @metric_name.save
-      render json: @metric_name, status: :created
-    else
-      render json: @metric_name.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /metric_names/1
-  def update
-    if @metric_name.update(metric_name_params)
-      render json: @metric_name
-    else
-      render json: @metric_name.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /metric_names/1
-  def destroy
-    @metric_name.destroy
+  # GET /non_empty_metric_names
+  def non_empty_metric_names
+    @metric_names = MetricName.includes(:metrics).reject{ |metric_name| metric_name.metrics.count == 0 }
+    render json: @metric_names, include: ['metric'], status: :ok
   end
 
   

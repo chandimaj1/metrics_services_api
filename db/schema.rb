@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2021_08_13_174143) do
 
-  create_table "metric_names", charset: "utf8", force: :cascade do |t|
+  create_table "metric_names", charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "metrics", charset: "utf8", force: :cascade do |t|
+  create_table "metrics", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "metric_name_id", null: false
     t.integer "value"
     t.datetime "created_at", precision: 6, null: false
